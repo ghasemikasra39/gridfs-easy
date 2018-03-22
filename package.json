@@ -1,0 +1,46 @@
+{
+  "name": "gridfs-easy",
+  "version": "1.0.0",
+  "description": "store your pictures in mongodb easily",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "readme": "readme.md",
+  "dependencies": {
+    "assert": "^1.4.1",
+    "async": "^2.6.0",
+    "body-parser": "~1.16.0",
+    "connect-multiparty": "^2.1.0",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.0",
+    "express": "~4.14.1",
+    "file-system": "^2.2.2",
+    "gridfs-locking-stream": "^1.1.1",
+    "gridfs-stream": "^1.1.1",
+    "jade": "~1.11.0",
+    "mongodb": "^3.0.4",
+    "mongoose": "^4.11.6",
+    "mongoose-currency": "^0.2.0",
+    "morgan": "~1.7.0",
+    "path": "^0.12.7",
+    "serve-favicon": "~2.3.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ghasemikasra39/gridfsEasy.git"
+  },
+  "keywords": [
+    "['mongodb'",
+    "'gridfs'",
+    "'mongoose'",
+    "'gridfs-stream'",
+    "'gridfs-locking-stream']"
+  ],
+  "author": "Kasra Ghasemi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ghasemikasra39/gridfsEasy/issues"
+  },
+  "homepage": "https://github.com/ghasemikasra39/gridfsEasy#readme"
+}
