@@ -1,6 +1,6 @@
 {
   "name": "gridfs-easy",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "store your pictures in mongodb easily",
   "main": "index.js",
   "scripts": {
@@ -8,23 +8,14 @@
   },
   "readme": "readme.md",
   "dependencies": {
-    "assert": "^1.4.1",
     "async": "^2.6.0",
-    "body-parser": "~1.16.0",
     "connect-multiparty": "^2.1.0",
-    "cookie-parser": "~1.4.3",
-    "debug": "~2.6.0",
-    "express": "~4.14.1",
     "file-system": "^2.2.2",
     "gridfs-locking-stream": "^1.1.1",
     "gridfs-stream": "^1.1.1",
-    "jade": "~1.11.0",
     "mongodb": "^3.0.4",
     "mongoose": "^4.11.6",
-    "mongoose-currency": "^0.2.0",
-    "morgan": "~1.7.0",
-    "path": "^0.12.7",
-    "serve-favicon": "~2.3.2"
+    "path": "^0.12.7"
   },
   "repository": {
     "type": "git",

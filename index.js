@@ -19,22 +19,13 @@ function gridFS(mongoose) {
     //handle the error event
     db.on('error', console.error.bind(console, 'connection error:'));
     var self = this;
-    this.getGFS = function () {
-        return gfs;
-    };
-    this.getDB = function () {
-        return db;
-    };
-    this.getMongoose = function () {
-        return mongoose;
-    };
-    this.putFile = function (path, name, extension, callback) {
+    this.putFile = function (path, name, callback) {
         try {
             if (typeof path == 'undefined') throw '(path) of the image is undefined in (putFile) function';
             if (typeof name == 'undefined') throw '(name) of the image is undefined in (putFile) function';
-            if (typeof extension == 'undefined') throw '(extension) of the image is undefined in (putFile) function';
+            // if (typeof extension == 'undefined') throw '(extension) of the image is undefined in (putFile) function';
             gfs.createWriteStream(
-                { filename: name, extension: extension },
+                {filename: name},
                 function (err, writestream) {
                     if (err) callback(err, null);
                     else {
@@ -63,7 +54,7 @@ function gridFS(mongoose) {
             var ObjectID = mongodb.ObjectId;
             var o_id = new ObjectID(id);
             console.log('residam man');
-            db.collection('fs.files').findOne({ _id: o_id }, function (err, Doc) {
+            db.collection('fs.files').findOne({_id: o_id}, function (err, Doc) {
 
                 if (err) callback(err, null);
                 else if (Doc == null) callback('File Not Found!', null);
@@ -85,17 +76,17 @@ function gridFS(mongoose) {
             //get the image extension
             async.eachSeries([id], function (id, next) {
                 self.getInfoById(id, function (err, Doc) {
-                    if (err) callback(err, null);
-                    else {
-                        imgExtension = path.extname(Doc.filename);
-                        next();
+                        if (err) callback(err, null);
+                        else {
+                            imgExtension = path.extname(Doc.filename);
+                            next();
+                        }
                     }
-                }
                 );
             }, function (err) {
                 if (err) callback(err, null);
                 else {
-                    gfs.createReadStream({ _id: id },
+                    gfs.createReadStream({_id: id},
                         function (err, readStream) {
                             if (err) callback(err, null);
                             else {
@@ -139,7 +130,7 @@ function gridFS(mongoose) {
     this.getAllByName = function (filename, callback) {
         try {
             if (typeof filename == 'undefined') throw '(filename) of the image is undefined in (getFileByName) function';
-            gfs.files.find({ filename: filename }).toArray(function (err, files) {
+            gfs.files.find({filename: filename}).toArray(function (err, files) {
                 if (err) callback(err, null);
                 else {
                     if (files) {
@@ -158,7 +149,7 @@ function gridFS(mongoose) {
     this.removeFile = function (id, callback) {
         try {
             if (typeof id == 'undefined') throw '(id) of the image is undefined in (removeFile) function';
-            gfs.remove({ _id: id }, function (err, result) {
+            gfs.remove({_id: id}, function (err, result) {
                 if (err) callback(err, null);
                 else if (result) callback(null, result);
             });
@@ -185,7 +176,7 @@ function gridFS(mongoose) {
         });
     };
     this.existFile = function (id, callback) {
-        gfs.exist({ _id: id }, function (err, found) {
+        gfs.exist({_id: id}, function (err, found) {
             if (err) callback(err, null);
             else callback(null, found);
         });
