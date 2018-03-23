@@ -8,7 +8,7 @@
 $ npm install --save gridfs-easy
 ```
 
-## Table of Content:
+## Table of Content
 * [Usage](#usage)
 * [Methods](#methods)
   * [getInfoById](#getInfoById)
@@ -28,7 +28,7 @@ $ npm install --save gridfs-easy
   
 ## <a name="usage"></a> Usage
 
-Craete a file like _db.js_:
+Craete a file like **_db.js_**:
 ```js
 //require the gridfs-easy and mongoose
 var mongoose = require('mongoose');
@@ -50,7 +50,7 @@ module.exports = new Promise(function (resolve, reject) {
     });
 });
 ```
-Require the db.js wherever you want. (e.g. testRouter.js)
+Require the **_db.js_** wherever you want. (e.g. pictureRouter.js)
 ```js
 var gfsEasy = require('./db').then(function (gfsEasy) {
     //make use of gfsEasy methods (e.g. gfsEasy.getInfoById())
@@ -62,7 +62,6 @@ var gfsEasy = require('./db').then(function (gfsEasy) {
 
 A document from **fs.files** collection with **_id** will be retrieved: 
 ```js
-
 pictureRouter.route('/getInfoById')
         .get(function (req, res, next) {
             gfsEasy.getInfoById('5ab417d36900a33288af587e', function (err, info) {
@@ -87,7 +86,7 @@ The callback function will be called with **info** of the document:
 ```
 ## <a name="getAllByName"></a> **getAllByName** (name, callback function )
 
-All documents with that **name** will be retrieved as an array from the **fs.files** collection   
+All documents with the **name** given as the first parameter will be retrieved as an array from the **fs.files** collection:   
 
 ```js
 pictureRouter.route('/getAllByName')
@@ -103,7 +102,7 @@ pictureRouter.route('/getAllByName')
 });
 ```
 
-docs: 
+**docs**: 
 ```js
 [
         {
@@ -128,13 +127,12 @@ docs:
             "metadata": null,
             "md5": "2830695ace2df8a15d3479c432af9f88"
         }
-    ]
-
+]
 ```
 
 ## <a name="getFileById"></a> **getFileById** (_id, callback function )
 
-A base64 format of a file from **fs.files** collection with **_id** will be retrieved: 
+A **base64** format of a file from **fs.files** collection with **_id** will be retrieved: 
 ```js
 pictureRouter.route('/getFileById')
         .get(function (req, res, next) {
@@ -150,7 +148,7 @@ pictureRouter.route('/getFileById')
 
 ## <a name="existFile"></a> **existFile** (_id, callback function )
 
-Check whether a file with *_id* exists in **fs.files** collection:
+Check whether a file with **_id** exists in **fs.files** collection:
 ```js
 
 gfsEasy.existFile('5ab417d36900a33288af587e', function (err, result) {
@@ -164,7 +162,7 @@ gfsEasy.existFile('5ab417d36900a33288af587e', function (err, result) {
 
 ## <a name="removeFile"></a> **removeFile** (_id, callback function )
 
-Remove a file with *_id* from **fs.files** collection:
+Remove a file with **_id** from **fs.files** collection:
 
 ```js
 
@@ -194,9 +192,9 @@ gfsEasy.removeAll(function (err, result) {
 ```
 ## <a name="putFile"></a>  **putFile** (path, name, callback function )
 
-Store a file in the **fs.files** collection. Here [**ng-file-upload**](https://www.npmjs.com/package/ng-file-upload)  is used on the client side to send the file to the server.
+Store a file in the **fs.files** collection. Here [**ng-file-upload**](https://www.npmjs.com/package/ng-file-upload)  is used on the client side to send the file to the server (some tips are provided [here](#tips)).
 
-Don't forget to use  [**connect-multiparty**](https://www.npmjs.com/package/connect-multiparty) as a middleware. 
+Don't forget to use  [**connect-multiparty**](https://www.npmjs.com/package/connect-multiparty) as a middleware:
 ```js
 pictureRouter.route('/putFile')
         .post(multipartMiddleware, function (req, res, next) {
@@ -245,7 +243,7 @@ Your document (in our example the **user** document) must hold the id of the pic
 
 ![populateImage](http://i68.tinypic.com/2ntgzlk.jpg)
 
-Once the **populateImage** function is called with the **user** document as the first parameter, the **imgBase64** field will be populated with the base64 format of the corresponding picture and the updated user document will be available in the callback function.
+Once the **populateImage** function is called with the **user** document as the first parameter, the **imgBase64** field will be populated with the base64 format of the corresponding picture and the updated user document will be available in the callback function:
 
 The **updatedUserDoc**: 
 ```js
