@@ -1,6 +1,6 @@
 # gridfs-easy [![npm version](https://badge.fury.io/js/gridfs-easy.svg)](https://badge.fury.io/js/gridfs-easy) [![GitHub version](https://badge.fury.io/gh/ghasemikasra39%2Fgridfs-easy.svg)](https://badge.fury.io/gh/ghasemikasra39%2Fgridfs-easy)
 
-> store your pictures in mongodb easily
+> Store your files in mongodb easily
 
 ## Installation
 
@@ -11,9 +11,10 @@ $ npm install --save gridfs-easy
 ## Table of Content
 * [Usage](#usage)
 * [Methods](#methods)
+  * [getBase64ById](#getBase64ById)
   * [getInfoById](#getInfoById)
   * [getAllByName](#getAllByName)
-  * [getFileById](#getFileById)
+  * [getImageById](#getImageById)
   * [existFile](#existFile)
   * [removeFile](#removeFile)
   * [removeAll](#removeAll)
@@ -27,6 +28,7 @@ $ npm install --save gridfs-easy
   
   
 ## <a name="usage"></a> Usage
+
 
 Craete a file like **_db.js_**:
 ```js
@@ -57,6 +59,19 @@ var gfsEasy = require('./db').then(function (gfsEasy) {
 })
 ```
 ## <a name="methods"></a> Methods
+
+## <a name="getBase64ById"></a> **getBase64ById** (_id, callback function )
+A **base64** format of the file (e.g. picture, video, pdf, etc.) from **fs.files** collection with **_id** will be retrieved: 
+```js
+pictureRouter.route('/getBase64ById')
+        .get(function (req, res, next) {
+            gfsEasy.getBase64ById('5ab417d36900a33288af587e', function (err, base64) {
+                if (err) {}
+                
+                else { res.json({fileBase64: base64}); }
+        })
+});
+```
 
 ## <a name="getInfoById"></a> **getInfoById** (_id, callback function )
 
@@ -130,13 +145,13 @@ pictureRouter.route('/getAllByName')
 ]
 ```
 
-## <a name="getFileById"></a> **getFileById** (_id, callback function )
+## <a name="getImageById"></a> **getImageById** (_id, callback function )
 
-A **base64** format of a file from **fs.files** collection with **_id** will be retrieved: 
+A **base64** format of the image plus the corresponding **data URI scheme** (e.g. data:image/png;base64,) of a file from **fs.files** collection with **_id** will be retrieved: 
 ```js
-pictureRouter.route('/getFileById')
+pictureRouter.route('/getImageById')
         .get(function (req, res, next) {
-            gfsEasy.getFileById('5ab417d36900a33288af587e', function (err, base64) {
+            gfsEasy.getImageById('5ab417d36900a33288af587e', function (err, base64) {
                 if (err) {}
                 
                     //send the image to the client 
@@ -296,8 +311,8 @@ We've created two buttons, one for choosing a file and the other for submitting:
 **HTML**:
 ```html
 <form name="Subform">
-            <div class="button btn btn-success" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'"
-                 ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100">Select
+            <div class="button btn btn-success" ngf-select ng-model="file" name="file" ngf-pattern="'*/*'"
+                 ngf-accept="'*/*'" ngf-max-size="20MB" ngf-min-height="100">Select
             </div>
             <button class="btn btn-info" type="submit" ng-click="submit()">putFile</button>
 </form>

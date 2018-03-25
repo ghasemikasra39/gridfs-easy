@@ -19,6 +19,7 @@ function gridFS(mongoose) {
     //handle the error event
     db.on('error', console.error.bind(console, 'connection error:'));
     var self = this;
+
     this.putFile = function (path, name, callback) {
         try {
             if (typeof path == 'undefined') throw '(path) of the image is undefined in (putFile) function';
@@ -68,7 +69,7 @@ function gridFS(mongoose) {
             callback(error, null);
         }
     };
-    this.getFileById = function (id, callback) {
+    this.getImageById = function (id, callback) {
         try {
             if (typeof id == 'undefined') throw '(id) of the image is undefined in (getFileById) function';
             var imgExtension = '';
@@ -119,6 +120,34 @@ function gridFS(mongoose) {
                         });
                 }
             });
+        }
+        catch (err) {
+            var error = {};
+            error.message = err;
+            error.status = 27017;
+            callback(error, null);
+        }
+    };
+    this.getBase64ById = function (id, callback) {
+        try {
+            if (typeof id == 'undefined') throw '(id) of the file is undefined in (getBse64ById) function';
+            gfs.createReadStream({_id: id},
+                function (err, readStream) {
+                    if (err) callback(err, null);
+                    else {
+                        if (readStream) {
+                            var data = [];
+                            readStream.on('data', function (chunk) {
+                                data.push(chunk);
+                            });
+                            readStream.on('end', function () {
+                                data = Buffer.concat(data);
+                                var Base64 = Buffer(data).toString('base64');
+                                callback(null, Base64);
+                            })
+                        }
+                    }
+                });
         }
         catch (err) {
             var error = {};
