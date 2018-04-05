@@ -1,6 +1,6 @@
 {
   "name": "gridfs-easy",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "store your pictures in mongodb easily",
   "main": "index.js",
   "scripts": {

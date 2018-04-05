@@ -29,6 +29,9 @@ $ npm install --save gridfs-easy
   
 ## <a name="usage"></a> Usage
 
+<a href="https://www.youtube.com/watch?v=mqZgKL1SdrA&feature=youtu.be"
+ target="_blank"><img src="http://i63.tinypic.com/1exu7a.jpg" 
+alt="usage" width="50%" border="10" /></a>
 
 Craete a file like **_db.js_**:
 ```js
